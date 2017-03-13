@@ -1,21 +1,29 @@
+<div class="mdl-grid">
+  
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--4-offset-desktop">
+
 <h1>Login</h1>
 
 <!-- show any messages that come back with authentication -->
 
-<div class="alert alert-danger">{{ message }}</div>
+<div class="alert alert-danger">{{message}}</div>
 
 <!-- LOGIN FORM -->
 <form action="/login" method="post">
-    <label for="email">Email</label>
-    <input type="text" name="email">
-        
-    <label for="password">Password</label>
-    <input type="password" name="password">
-    
-    <button type="submit" class="btn btn-warning btn-lg">Login</button>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <label class="mdl-textfield__label" for="email">Email</label>
+    <input class="mdl-textfield__input" type="text" name="email">
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <label class="mdl-textfield__label" for="password">Password</label>
+    <input class="mdl-textfield__input" type="password" name="password">
+    </div><br>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
 </form>
 
 <hr>
 
 <p>Need an account? <a href="/signup">Signup</a></p>
 <p>Or go <a href="/">home</a>.</p>
+</div>
+</div>

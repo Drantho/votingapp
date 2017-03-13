@@ -15,6 +15,8 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.1",
     "handlebars": "^4.0.6",
+    "material-design": "0.0.0",
+    "material-design-icons": "^3.0.1",
     "method-override": "^2.3.7",
     "mongoose": "^4.8.6",
     "morgan": "^1.8.1",
