@@ -1,0 +1,1 @@
+Authentication created following tutorial at https://scotch.io/tutorials/easy-node-authentication-setup-and-local

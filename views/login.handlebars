@@ -1,0 +1,21 @@
+<h1>Login</h1>
+
+<!-- show any messages that come back with authentication -->
+
+<div class="alert alert-danger">{{ message }}</div>
+
+<!-- LOGIN FORM -->
+<form action="/login" method="post">
+    <label for="email">Email</label>
+    <input type="text" name="email">
+        
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    
+    <button type="submit" class="btn btn-warning btn-lg">Login</button>
+</form>
+
+<hr>
+
+<p>Need an account? <a href="/signup">Signup</a></p>
+<p>Or go <a href="/">home</a>.</p>

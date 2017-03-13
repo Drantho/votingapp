@@ -6,7 +6,23 @@
   "author": "Mostafa Eweda <mo.eweda@gmail.com>",
   "dependencies": {
     "async": "~0.2.8",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
     "express": "~3.2.4",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.1",
+    "handlebars": "^4.0.6",
+    "method-override": "^2.3.7",
+    "mongoose": "^4.8.6",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.4",
     "socket.io": "~0.9.14"
   },
   "scripts": {
