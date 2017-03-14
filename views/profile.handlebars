@@ -1,3 +1,6 @@
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop">
+
 <div class="page-header text-center">
 	<h1><span class="fa fa-anchor"></span> Profile Page</h1>
 	<a href="/logout" class="btn btn-default btn-sm">Logout</a>
@@ -6,7 +9,18 @@
 <h3>Local</h3>
 
 <p>
-    <strong>id</strong>: {{ user._id }}<br>
-	<strong>email</strong>: {{ user.local.email }}<br>
-	<strong>password</strong>: {{ user.local.password }}
+    <strong>ID</strong>: {{ user._id }}<br>
+	<strong>Email</strong>: {{ user.local.email }}<br>
+	<strong>Password</strong>: {{ user.local.password }}<br>
+	<strong>My Polls</strong>
+	<ul class="mdl-list">
+		{{#each Polls}}
+        	<li class="mdl-list__item">
+        		<span class="mdl-list__item-primary-content">
+        			<a href="/poll/{{this._id}}">{{this.question}}</a>
+                </span>
+           	</li>
+        {{/each}}
+	</ul>
 </p>
+</div></div>

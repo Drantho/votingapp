@@ -38,7 +38,9 @@
         
         var newTextBoxDiv = $(document.createElement('div'));
         newTextBoxDiv.addClass("mdl-textfield mdl-js-textfield mdl-textfield--floating-label");
-	    newTextBoxDiv.after().html('<label class="mdl-textfield__label">Response</label>' + '<input type="text" class="mdl-textfield__input">');
+        var idNumber = 3;
+        idNumber += $("#divResponse").find('input:text').length;
+	    newTextBoxDiv.after().html('<label class="mdl-textfield__label">Response</label>' + '<input type="text" name="response' + idNumber + '" class="mdl-textfield__input">');
 
 	    newTextBoxDiv.appendTo("#divResponse");
         componentHandler.upgradeDom();
