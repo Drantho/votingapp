@@ -1,0 +1,3 @@
+implement search. use http://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find
+
+order lists by recent on /mypolls and /myvotes
