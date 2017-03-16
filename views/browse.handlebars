@@ -1,0 +1,33 @@
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop">
+        <h5>Page {{page}}</h5>
+        {{#each polls}}
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+            <div class="mdl-card__title">
+                <i class="material-icons mdl-list__item-icon">equalizer</i>
+                <a href='/poll/{{this._id}}'><h2 class="mdl-card__title-text">{{this.question}}</h2></a>
+            </div>
+            
+            <div class="mdl-card__supporting-text">
+                <strong>Poll ID: </strong>{{this._id}}<br>
+                <strong>Created: </strong>{{this.pollDate}}<br>
+                <strong>By: </strong><a href="/user/{{this.user}}">{{this.user}}</a><br>
+            </div>
+           
+        </div>
+        <br>
+        {{/each}}
+        <div class="mdl-card__actions mdl-card--border">
+            {{#if prev}}
+            <a href="/browse?page={{prev}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              Previous
+            </a>
+            {{/if}}
+            {{#if next}}
+            <a href="/browse?page={{next}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              Next
+            </a>
+            {{/if}}
+        </div>
+    </div>
+</div>

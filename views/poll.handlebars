@@ -1,40 +1,55 @@
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop">
-        {{#if error}}
-            <h3>{{error}}</h3>
-        {{/if}}
-        {{# if question}}
-            <h3>{{question}}</h3>
-        {{#if voteMessage}}
-            <h4>{{voteMessage}}</h4>
-        {{/if}}
-        <strong>Poll ID: </strong>{{pollId}}<br>
-        <strong>Created: </strong>{{pollDate}}<br>
-        <strong>By: </strong>{{user}}<br>
-        <hr>
-        <h5>{{question}}</h5>
-<style>
-.demo-list-control {
-  width: 300px;
-}
-
-.demo-list-radio {
-  display: inline;
-}
-</style>
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+            {{#if error}}
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">{{error}}</h2>
+            </div>
+            {{/if}}
+            {{# if question}}
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">{{question}}</h2>
+            </div>
+            
+            <div class="mdl-card__menu">
+                <a href="https://twitter.com/intent/tweet?text='{{question}}{{#if voteMessage}} - I voted {{voteMessage}}{{/if}}'+'&url=https://votingapp-drantho.c9users.io/poll/{{pollId}}'">
+                    <span class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Twitter_bird_logo_2012.svg/1259px-Twitter_bird_logo_2012.svg.png" style="height: 35px">
+                    </span>
+                </a>
+            </div>
+            
+            <div class="mdl-card__supporting-text">
+                <strong>Poll ID: </strong>{{pollId}}<br>
+                <strong>Created: </strong>{{pollDate}}<br>
+                <strong>By: </strong><a href="/user/{{user}}">{{user}}</a><br>
+            </div>
+            {{#if voteMessage}}
+            <div class="mdl-card__actions mdl-card--border">
+                <h4>You voted &quot;{{voteMessage}}&quot; in this poll</h4>
+            </div>
+            {{/if}}
+        </div>
+        <br>
+        
 
         {{#if userFound}}
             {{#if hasVoted}}
-                <ul class="mdl-list">
-                  {{#each responses}}
-                  <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                      {{this}}
-                    </span>
-                  </li>
-                  {{/each}}
-                </ul>
+                
             {{else}}
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Cast your vote!</h2>
+                </div>
+                <style>
+                    .demo-list-control {
+                        width: 300px;
+                    }
+
+                    .demo-list-radio {
+                        display: inline;
+                    }
+                </style>
                 <form method="POST" action="/vote">
                     <ul class="demo-list-control mdl-list">
                     {{#each responses}}
@@ -45,99 +60,172 @@
                             </span>
                             <span class="mdl-list__item-secondary-action">
                                 <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-{{this}}">
-                                    <input type="radio" id="list-option-{{this}}" class="mdl-radio__button" name="response" value="{{this}}" checked />
+                                    <input type="radio" id="list-option-{{this}}" class="mdl-radio__button" name="response" value="{{this}}"/>
                                 </label>
                             </span>
                         </li>
         
         
                     {{/each}}
-                </ul>
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Submit</button>
+                    </ul>
+                    
+                    
+                    
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Submit</button>
+                    <input type="hidden" name="pollId" value="{{pollId}}">
+                </form>
+                <h5>Add another response</h5>
+                <form method="Post" action="/updatepoll/{{pollId}}">
+                        <div id="divResponse"></div>
+                        <span id="addResponse" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                            <i class="material-icons">add</i>
+                        </span>
+                        <span id="removeResponse" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                            <i class="material-icons">remove</i>
+                        </span><br><br>
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Update Poll</button>
+                    </form><br><br>
+            </div>
             {{/if}}
         {{else}}
-            
-            
-            <ul class="mdl-list">
-              {{#each responses}}
-              <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
-                  {{this}}
-                </span>
-              </li>
-              {{/each}}
+        <br>
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Cast your vote!</h2>
+            </div>
+            <ul class="demo-list-control mdl-list">
+                {{#each responses}}
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        {{this}}
+                    </span>
+                </li>
+                {{/each}}    
             </ul>
+            <div class="mdl-card__actions mdl-card--border">
+                <a href="/signup" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Sign up
+                </a>
+                or
+                <a href="/login" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Log in
+                </a>
+                to vote
+              </div>
+        </div>
+        {{/if}}
             
-            <a href="/signup">Sign up</a> or <a href="/login">Log in</a> to vote
-        {{/if}}
         
-        <input type="hidden" name="pollId" value="{{pollId}}">
+    {{/if}}
+    <input type="hidden" name="hdnDataArr" id="hdnDataArr" value="{{dataArr}}">
+    <input type="hidden" name="hdnLabelArr" id="hdnLabelArr" value="{{responses}}">
+    <br>
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Vote Tally</h2>
+        </div>
+        <style>
+            .demo-list-control {
+                width: 300px;
+            }
+
+            .demo-list-radio {
+                display: inline;
+            }
+        </style>
         
-        
-        
-        </form>
-        {{/if}}
-        <input type="hidden" name="hdnDataArr" id="hdnDataArr" value="{{dataArr}}">
-        <input type="hidden" name="hdnLabelArr" id="hdnLabelArr" value="{{responses}}">
         
         <canvas id="myChart" width="600px" height="300px"></canvas>
-                    
-        <script>
+    </div>
     
-            $(document).ready(function(){
+<!--
+CHART CONFIG
+-->
+<script>
+
+    $(document).ready(function(){
         
-            var dataArr = [];
-            var labelsArr = [];
+        var dataArr = [];
+        var labelsArr = [];
           
-            dataArr = $("#hdnDataArr").val().split(',');
-            labelsArr = $("#hdnLabelArr").val().split(',');
+        dataArr = $("#hdnDataArr").val().split(',');
+        labelsArr = $("#hdnLabelArr").val().split(',');
                 
-            var voteBgColor = [];
-            var voteBorderColor = [];
+        var voteBgColor = [];
+        var voteBorderColor = [];
         
-            for(var i=0; i<dataArr.length; i++){
-                voteBgColor.push('rgba(54, 162, 235, 0.7)');
-                voteBorderColor.push('rgba(54, 162, 235, 1)');
-            }
+        for(var i=0; i<dataArr.length; i++){
+            voteBgColor.push('rgba(54, 162, 235, 0.7)');
+            voteBorderColor.push('rgba(54, 162, 235, 1)');
+        }
         
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsArr,
+                datasets: [
+                    {
+                        label: 'Votes',
+                        data: dataArr,
+                        backgroundColor: voteBgColor,
+                        bordrColor: voteBorderColor,
+                        borderWidth: 1
+                    }
+                ],
         
-        
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labelsArr,
-                    datasets: [
-                {
-                    label: 'Votes',
-                    data: dataArr,
-                    backgroundColor: voteBgColor,
-                    borderColor: voteBorderColor,
-                    borderWidth: 1
-                }],
-        
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: '',
+                    fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                    fontSize: 24,
+                    fontColor: '#000000'
                 },
-                options: {
-                    title: {
-                        display: true,
-                        text: '{{question}}',
-                        fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-                        fontSize: 24,
-                        fontColor: '#000000'
-                    },
-                    scales: {
-                        yAxes: [{
+                scales: {
+                    yAxes: [
+                        {
+                       
                             ticks: {
                                 beginAtZero:true
                             }
-                        }]
-                    }
+                        }
+                    ]
                 }
-            });
+            }
         });
-        </script>
+    });
+</script>
         
         
+<!--
+ADD/REMOVE response boxes
+-->
+<script>
+
+    $('#addResponse').click(function(){
+        
+        var newTextBoxDiv = $(document.createElement('div'));
+        newTextBoxDiv.addClass("mdl-textfield mdl-js-textfield mdl-textfield--floating-label");
+        var idNumber = 1;
+        idNumber += $("#divResponse").find('input:text').length;
+	    newTextBoxDiv.after().html('<label class="mdl-textfield__label">Response</label>' + '<input type="text" name="response' + idNumber + '" class="mdl-textfield__input">');
+
+	    newTextBoxDiv.appendTo("#divResponse");
+	    $("#divResponse").append("<br>");
+        componentHandler.upgradeDom();
+        
+    });
+    
+    $('#removeResponse').click(function(){
+        
+        $("#divResponse").children().last().remove();   
+        $("#divResponse").children().last().remove();   
+        
+    });
+    
+</script>        
         
         
         

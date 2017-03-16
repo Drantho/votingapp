@@ -2,7 +2,7 @@
 module.exports = function(app, passport) {
 
 	var Poll = require('./models/pollSchema');
-
+	var User = require("./models/user");
 	// =====================================
 	// HOME PAGE (with login links) ========
 	// =====================================
@@ -47,17 +47,77 @@ module.exports = function(app, passport) {
 	// =====================================
 	// PROFILE SECTION =========================
 	// =====================================
-	// we will want this protected so you have to be logged in to visit
-	// we will use route middleware to verify this (the isLoggedIn function)
+	
 	app.get('/profile', isLoggedIn, function(req, res) {
 		
-		Poll.find({user: req.user.local.email},function(err, polls) {
+		Poll.find( { $or:[ {'user':req.user.local.email}, {'votes.user':req.user.local.email} ]},function(err, polls) {
 			if (err) throw err;
 				
 				res.render('profile.handlebars', {
+				title: 'Profile',					
 				user : req.user,
-				Polls : polls
+				polls : CountUsersPolls(polls, req.user.local.email),
+				votes : CountUsersVotes(polls, req.user.local.email)
+			});
+		});
+		
+		
+	});
+	
+	// =====================================================================
+	// USERS LIST
+	// ======================================================================
+	
+	app.get('/users', function(req, res) {
+		
+		var page = 1;
+			
+		if(req.query.page){
+			page = req.query.page;	
+		}
+		var skip = (page-1) * 5; 
+			
+		User.find({},{},{ skip: skip, limit: 5 }).sort({local: -1}).exec(function(err, users) {
+			if (err) throw err;
 				
+				var count = users.length;
+				if(count == 5){
+					var next =parseInt(page)+1;	
+				}else{
+					next = false;
+				}
+				
+				var prev;
+				if(page == 1){
+					prev = false;
+				}
+				else{
+					prev = parseInt(page)-1;	
+				}
+				
+				res.render('users.handlebars', {
+				title: 'Users',					
+				users : GetNames(users),
+				next : next,
+				prev : prev,
+				page : page
+			});
+		});
+	});
+	
+	// =============================================
+	// SINGLE USER
+	// =============================================
+	
+	app.get('/user/:name', function(req, res) {
+		
+		Poll.find({'user':req.params.name},function(err, polls) {
+			if (err) throw err;
+				
+				res.render('user.handlebars', {
+				title: req.params.name,					
+				user : req.params.name,
+				polls : polls
 			});
 		});
 		
@@ -105,7 +165,7 @@ module.exports = function(app, passport) {
 		var poll = new Poll({
 		user: req.user.local.email,
 		question: req.body.question,
-		pollDate : (new Date()).toGMTString(),
+		pollDate : (new Date()).toDateString(),
 		responses : myResponse
 		});
 		
@@ -135,20 +195,25 @@ module.exports = function(app, passport) {
 						if(foundPoll.votes[i].user == req.user.local.email){
 							//render results of poll
 							hasvoted = true; //Submit will be hid if user has already voted
-							votemessage = 'You voted "' + foundPoll.votes[i].response + '" in this poll';
+							votemessage = foundPoll.votes[i].response;
 						}
 					}	
 				}
 				else{
 					userfound = false; //Submit will also be hid if not signed in
 				}
+				
+				var date = new Date;
+				
+				date = foundPoll.pollDate;
+				
 				res.render('poll.handlebars', {
 					title : 'Poll', 
 					user : foundPoll.user,
 					pollId : req.params.id,
 					question : foundPoll.question,
 					responses : foundPoll.responses,
-					pollDate : foundPoll.pollDate,
+					pollDate : date.toDateString(),
 					userFound : userfound,
 					hasVoted : hasvoted,
 					voteMessage : votemessage,
@@ -190,6 +255,137 @@ module.exports = function(app, passport) {
 			
 		});
 	});
+	
+	// ===========================================================
+	// My Polls page
+	// ===========================================================
+	
+		app.get('/mypolls', isLoggedIn, function(req, res) {
+		
+		Poll.find({'user':req.user.local.email},function(err, polls) {
+			if (err) throw err;
+				
+				res.render('mypolls.handlebars', {
+				title: 'My Polls',					
+				polls : polls
+			});
+		});
+	});
+	
+	
+	// ================================================
+	// DELETE POLL
+	// ================================================
+	
+	app.get('/deletepoll/:id', isLoggedIn, function(req, res){
+		Poll.findOne({_id : req.params.id},function(err, polls) {
+			if (err) throw err;
+				
+				if(req.user.local.email == polls.user){
+					
+					Poll.findByIdAndRemove(req.params.id, function(err) {
+						if (err) throw err;
+			
+						res.redirect('/profile');
+					});
+					
+				}
+				else{
+					res.redirect('/profile');
+				}
+			});
+		
+	});
+	
+	// ==================================================
+	// UPDATE POLL
+	// ==================================================
+	
+	app.post('/updatepoll/:id', function(req, res){
+		
+		console.log(req.params.id);
+		
+		Poll.findOne({'_id':req.params.id},function(err, polls) {
+			if (err) throw err;
+			
+			var response = polls.responses;
+			
+			var counter = 1;
+			var body = JSON.parse(JSON.stringify(req.body));
+			while(body.hasOwnProperty('response' + counter)){
+			
+				response.push(req.body['response' + counter]);
+			
+				counter++
+			}
+			
+			Poll.findByIdAndUpdate(req.params.id, { responses: response }, function(err, user) {
+			if (err) throw err;
+			
+				res.redirect('/poll/' + req.params.id);
+			});	
+			
+		});
+	});
+	
+	// ===========================================================
+	// My Votes page
+	// ===========================================================
+	
+		app.get('/myvotes', isLoggedIn, function(req, res) {
+		
+		Poll.find({'votes.user':req.user.local.email},function(err, polls) {
+			if (err) throw err;
+				
+				res.render('myvotes.handlebars', {
+				title: 'My Votes',					
+				polls : polls
+			});
+		});
+	});
+	
+	// ===========================================================
+	// Browse page
+	// ===========================================================
+	
+	app.get('/browse', function(req, res) {
+			
+		var page = 1;
+			
+		if(req.query.page){
+			page = req.query.page;	
+		}
+		var skip = (page-1) * 5; 
+			
+		Poll.find({},{},{ skip: skip, limit: 5 }).sort({pollDate: -1}).exec(function(err, polls) {
+			if (err) throw err;
+				
+				var count = polls.length;
+				if(count == 5){
+					var next =parseInt(page)+1;	
+				}else{
+					next = false;
+				}
+				
+				var prev;
+				if(page == 1){
+					prev = false;
+				}
+				else{
+					prev = parseInt(page)-1;	
+				}
+				
+				res.render('browse.handlebars', {
+				title: 'Browse',					
+				polls : polls,
+				next : next,
+				prev : prev,
+				page : page
+		});
+	});
+		
+		
+	});
 };
 
 // route middleware to make sure
@@ -214,4 +410,42 @@ function getChartDataArray(poll){
 		}
 	}
 	return dataArr;
+}
+
+function CountUsersPolls(poll, user){
+	var count = 0;
+	for(var i=0; i<poll.length; i++){
+		if(poll[i].user == user){
+			count++;
+		}
+	}
+	return count;
+}
+
+function CountUsersVotes(poll, user){
+	var count = 0;
+	for(var i=0; i<poll.length; i++){
+		
+		if(poll[i].votes){
+			for(var j=0; j<poll[i].votes.length; j++){
+				if(poll[i].votes[j].user == user){
+					count++;
+				}	
+			}
+		}
+	}
+	return count;
+}
+
+function GetNames(users){
+	
+	var names=[];
+	
+	for(var i=0; i<users.length; i++){
+		names.push(users[i].local.email)
+	}
+	
+	names.sort();
+	
+	return names;
 }

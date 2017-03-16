@@ -1,29 +1,42 @@
 <div class="mdl-grid">
   
   <div class="mdl-cell mdl-cell--4-col mdl-cell--4-offset-desktop">
-
-<h1>Login</h1>
-
-<!-- show any messages that come back with authentication -->
-
-<div class="alert alert-danger">{{message}}</div>
-
-<!-- LOGIN FORM -->
-<form action="/login" method="post">
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <label class="mdl-textfield__label" for="email">Email</label>
-    <input class="mdl-textfield__input" type="text" name="email">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Login</h2>
+      </div>
+      
+      <!-- show any messages that come back with authentication -->
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">{{message}}</h2>
+      </div>
+      
+      <!-- LOGIN FORM -->
+      <form action="/login" method="post">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="email">User Name</label>
+          <input class="mdl-textfield__input" type="text" name="email">
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label class="mdl-textfield__label" for="password">Password</label>
+          <input class="mdl-textfield__input" type="password" name="password">
+        </div><br>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button><br><br>
+      </form>
+      
+      <div class="mdl-card__actions mdl-card--border">
+        
+        Need an account?
+        <a href='/signup' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          Signup
+        </a>
+        Or go 
+        <a href='/' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          Home
+        </a>
+        
+      </div>
+      
     </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <label class="mdl-textfield__label" for="password">Password</label>
-    <input class="mdl-textfield__input" type="password" name="password">
-    </div><br>
-    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
-</form>
-
-<hr>
-
-<p>Need an account? <a href="/signup">Signup</a></p>
-<p>Or go <a href="/">home</a>.</p>
-</div>
+  </div>
 </div>

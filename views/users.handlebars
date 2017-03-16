@@ -1,0 +1,36 @@
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop">
+        <h5>Page {{page}}</h5>
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+            <div class="mdl-card__title">
+               <h2 class="mdl-card__title-text">Users</h2>
+            </div>
+            
+            
+            <ul class="demo-list-item mdl-list">
+                {{#each users}}
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <a href="/user/{{this}}"><i class="material-icons mdl-list__item-icon">person</i>{{this}}</a>
+                    </span>
+                </li>
+                {{/each}}
+            </ul>
+            
+        <div class="mdl-card__actions mdl-card--border">
+            {{#if prev}}
+            <a href="/browse?page={{prev}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              Previous
+            </a>
+            {{/if}}
+            {{#if next}}
+            <a href="/browse?page={{next}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              Next
+            </a>
+            {{/if}}
+        </div>
+        </div>
+        <br>
+        
+    </div>
+</div>

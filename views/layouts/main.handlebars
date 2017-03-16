@@ -10,14 +10,18 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
- </head>
- <body>
-  <!-- Uses a header that contracts as the page scrolls down. -->
   <style>
    .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type {
     padding-right: 0;
    }
+   body{
+    background-color: #FAFAFA;
+   }
   </style>
+ </head>
+ <body>
+  <!-- Uses a header that contracts as the page scrolls down. -->
+  
   <div class="demo-layout-waterfall mdl-layout mdl-js-layout">
    <header class="mdl-layout__header mdl-layout__header--waterfall">
     <!-- Top row, always visible -->
@@ -30,7 +34,7 @@
        <i class="material-icons">search</i>
       </label>
       <div class="mdl-textfield__expandable-holder">
-       <input class="mdl-textfield__input" type="text" name="sample" id="waterfall-exp">
+       <input class="mdl-textfield__input" type="text" placeholder="coming soon!" name="sample" id="waterfall-exp">
       </div>
      </div>
     </div>
@@ -40,9 +44,10 @@
      <!-- Navigation -->
      <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="/profile">Profile</a>
-      <a class="mdl-navigation__link" href="">My Polls</a>
-      <a class="mdl-navigation__link" href="">Polls I've Taken</a>
-      <a class="mdl-navigation__link" href="">Browse Polls</a>
+      <a class="mdl-navigation__link" href="/mypolls">My Polls</a>
+      <a class="mdl-navigation__link" href="/myvotes">My Votes</a>
+      <a class="mdl-navigation__link" href="/browse">Browse Polls</a>
+      <a class="mdl-navigation__link" href="/users">Browse Users</a>
       <a class="mdl-navigation__link" href="/createpoll">Create Poll</a>
      </nav>
     </div>
@@ -51,9 +56,10 @@
     <span class="mdl-layout-title">Pollkat</span>
     <nav class="mdl-navigation">
      <a class="mdl-navigation__link" href="/profile">Profile</a>       
-     <a class="mdl-navigation__link" href="">My Polls</a>
-     <a class="mdl-navigation__link" href="">Polls I've Taken</a>
-     <a class="mdl-navigation__link" href="">Browse Polls</a>
+     <a class="mdl-navigation__link" href="/mypolls">My Polls</a>
+     <a class="mdl-navigation__link" href="/myvotes">My Votes</a>
+     <a class="mdl-navigation__link" href="browse">Browse Polls</a>
+     <a class="mdl-navigation__link" href="/users">Browse Users</a>
      <a class="mdl-navigation__link" href="/createpoll">Create Poll</a>
     </nav>
    </div>
@@ -62,16 +68,11 @@
      <!-- Your content goes here -->
      {{{body}}}
     </div>
+    
    </main>
-   <footer class="mdl-mini-footer">
-    <div class="mdl-mini-footer__left-section">
-     <div class="mdl-logo">Pollkat &copy; 2017 - Anthony Mitchell</div>
-     <ul class="mdl-mini-footer__link-list">
-      <li><a href="#"></a></li>
-     </ul>
-    </div>
-   </footer>
+   
   </div>
+  
  </body>
 </html>
 

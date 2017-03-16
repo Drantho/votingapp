@@ -1,26 +1,19 @@
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop">
 
-<div class="page-header text-center">
-	<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-	<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	<div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+		<div class="mdl-card__title">
+        	<h2 class="mdl-card__title-text">Profile</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+			<strong>User Name</strong>: {{ user.local.email }}<br>
+			<i class="material-icons mdl-list__item-icon" style="position: relative; top: 6px;">equalizer</i><a href="/mypolls"><strong>My Polls</strong>: {{polls}}</a><br>
+			<i class="material-icons mdl-list__item-icon" style="position: relative; top: 6px;">done</i><a href="/myvotes"><strong>My Votes</strong>: {{votes}}</a>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+    		<a href="/logout" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      			Logout
+    		</a>
+  		</div>
+    </div>
 </div>
-
-<h3>Local</h3>
-
-<p>
-    <strong>ID</strong>: {{ user._id }}<br>
-	<strong>Email</strong>: {{ user.local.email }}<br>
-	<strong>Password</strong>: {{ user.local.password }}<br>
-	<strong>My Polls</strong>
-	<ul class="mdl-list">
-		{{#each Polls}}
-        	<li class="mdl-list__item">
-        		<span class="mdl-list__item-primary-content">
-        			<a href="/poll/{{this._id}}">{{this.question}}</a>
-                </span>
-           	</li>
-        {{/each}}
-	</ul>
-</p>
-</div></div>
