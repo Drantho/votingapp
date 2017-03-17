@@ -165,7 +165,7 @@ module.exports = function(app, passport) {
 		var poll = new Poll({
 		user: req.user.local.email,
 		question: req.body.question,
-		pollDate : (new Date()).toDateString(),
+		pollDate : (new Date()).toGMTString(),
 		responses : myResponse
 		});
 		
