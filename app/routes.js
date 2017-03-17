@@ -96,7 +96,8 @@ module.exports = function(app, passport) {
 				}
 				
 				res.render('users.handlebars', {
-				title: 'Users',					
+				title: 'Users',
+				user : req.user,
 				users : GetNames(users),
 				next : next,
 				prev : prev,
@@ -115,8 +116,9 @@ module.exports = function(app, passport) {
 			if (err) throw err;
 				
 				res.render('user.handlebars', {
+				user : req.user,	
 				title: req.params.name,					
-				user : req.params.name,
+				userSearch : req.params.name,
 				polls : polls
 			});
 		});
@@ -209,7 +211,8 @@ module.exports = function(app, passport) {
 				
 				res.render('poll.handlebars', {
 					title : 'Poll', 
-					user : foundPoll.user,
+					user : req.user,
+					creator : foundPoll.user,
 					pollId : req.params.id,
 					question : foundPoll.question,
 					responses : foundPoll.responses,
@@ -266,6 +269,7 @@ module.exports = function(app, passport) {
 			if (err) throw err;
 				
 				res.render('mypolls.handlebars', {
+				user : req.user,
 				title: 'My Polls',					
 				polls : polls
 			});
@@ -338,6 +342,7 @@ module.exports = function(app, passport) {
 			if (err) throw err;
 				
 				res.render('myvotes.handlebars', {
+				user : req.user,
 				title: 'My Votes',					
 				polls : polls
 			});
@@ -376,6 +381,7 @@ module.exports = function(app, passport) {
 				}
 				
 				res.render('browse.handlebars', {
+				user : req.user,
 				title: 'Browse',					
 				polls : polls,
 				next : next,

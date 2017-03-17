@@ -43,24 +43,32 @@
      <div class="mdl-layout-spacer"></div>
      <!-- Navigation -->
      <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/">Home</a>
+      {{# if user}}
       <a class="mdl-navigation__link" href="/profile">Profile</a>
       <a class="mdl-navigation__link" href="/mypolls">My Polls</a>
       <a class="mdl-navigation__link" href="/myvotes">My Votes</a>
+      <a class="mdl-navigation__link" href="/createpoll">Create Poll</a>
+      {{/if}}
+      
       <a class="mdl-navigation__link" href="/browse">Browse Polls</a>
       <a class="mdl-navigation__link" href="/users">Browse Users</a>
-      <a class="mdl-navigation__link" href="/createpoll">Create Poll</a>
      </nav>
     </div>
    </header>
    <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Pollkat</span>
     <nav class="mdl-navigation">
-     <a class="mdl-navigation__link" href="/profile">Profile</a>       
-     <a class="mdl-navigation__link" href="/mypolls">My Polls</a>
-     <a class="mdl-navigation__link" href="/myvotes">My Votes</a>
-     <a class="mdl-navigation__link" href="/browse">Browse Polls</a>
-     <a class="mdl-navigation__link" href="/users">Browse Users</a>
-     <a class="mdl-navigation__link" href="/createpoll">Create Poll</a>
+     <a class="mdl-navigation__link" href="/">Home</a>
+    {{# if user}}
+    <a class="mdl-navigation__link" href="/profile">Profile</a>
+    <a class="mdl-navigation__link" href="/mypolls">My Polls</a>
+    <a class="mdl-navigation__link" href="/myvotes">My Votes</a>
+    <a class="mdl-navigation__link" href="/createpoll">Create Poll</a>
+    {{/if}}
+      
+    <a class="mdl-navigation__link" href="/browse">Browse Polls</a>
+    <a class="mdl-navigation__link" href="/users">Browse Users</a>
     </nav>
    </div>
    <main class="mdl-layout__content">
