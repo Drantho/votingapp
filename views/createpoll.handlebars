@@ -1,34 +1,37 @@
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col mdl-cell--4-offset-desktop">
-
-        <h1>Create A Poll</h1>
-
-        <!-- POLL FORM -->
-        <form action="/addpoll" method="post">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <label class="mdl-textfield__label" for="question">Poll Question</label>
-                <input class="mdl-textfield__input" type="text" name="question">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="width: 100%; padding-left: 25px; padding-right: 25px; padding-top: 5px; padding-bottom: 25px;">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Create A Poll</h2>
             </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <label class="mdl-textfield__label" for="response1">Response</label>
-                <input class="mdl-textfield__input" type="text" name="response1">
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <label class="mdl-textfield__label" for="response2">Response</label>
-                <input class="mdl-textfield__input" type="text" name="response2">
-            </div>
-            <div id="divResponse"></div>
+            <!-- POLL FORM -->
+            <form action="/addpoll" method="post">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <label class="mdl-textfield__label" for="question">Poll Question</label>
+                    <input class="mdl-textfield__input" type="text" name="question">
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <label class="mdl-textfield__label" for="response1">Response</label>
+                    <input class="mdl-textfield__input" type="text" name="response1">
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <label class="mdl-textfield__label" for="response2">Response</label>
+                    <input class="mdl-textfield__input" type="text" name="response2">
+                </div>
+                <div id="divResponse"></div>
             
-            <!-- ADD/REMOVE response fields -->
-            <span id="addResponse" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-              <i class="material-icons">add</i>
-            </span>
-            <span id="removeResponse" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-              <i class="material-icons">remove</i>
-            </span><br><br>
+                <!-- ADD/REMOVE response fields -->
+                <span id="addResponse" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                    <i class="material-icons">add</i>
+                </span>
+                <span id="removeResponse" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+                    <i class="material-icons">remove</i>
+                </span><br><br>
             
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create Poll</button>
-        </form>
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create Poll</button>
+            </form>
+        </div>
+        
     </div>
 </div>
 
