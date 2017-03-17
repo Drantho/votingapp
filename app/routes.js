@@ -118,7 +118,7 @@ module.exports = function(app, passport) {
 				res.render('user.handlebars', {
 				user : req.user,	
 				title: req.params.name,					
-				userSearch : req.params.name,
+				searchUser : req.params.name,
 				polls : polls
 			});
 		});
