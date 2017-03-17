@@ -268,7 +268,13 @@ module.exports = function(app, passport) {
 		Poll.find({'user':req.user.local.email},function(err, polls) {
 			if (err) throw err;
 				
+				var emptyMessage = "";
+				
+				if (polls.length == 0){
+					emptyMessage = "You have not created any polls yet ";
+				}
 				res.render('mypolls.handlebars', {
+				emptyMessage : emptyMessage,
 				user : req.user,
 				title: 'My Polls',					
 				polls : polls
@@ -341,7 +347,13 @@ module.exports = function(app, passport) {
 		Poll.find({'votes.user':req.user.local.email},function(err, polls) {
 			if (err) throw err;
 				
+				var emptyMessage = "";
+				
+				if (polls.length == 0){
+					emptyMessage = "You have not voted on any polls yet ";
+				}
 				res.render('myvotes.handlebars', {
+				emptyMessage : emptyMessage,
 				user : req.user,
 				title: 'My Votes',					
 				polls : polls
